@@ -4,11 +4,13 @@ const gameArea = document.querySelector(".gameArea");
 
 
 //Object which init game play
-let player = {};
+let player = {
+    speed: 5
+};
 
 //Object which tracks the keyPresses
 let keys = {
-    ArrowTop: false,
+    ArrowUp: false,
     ArrowRight: false,
     ArrowDown: false,
     ArrowLeft: false
@@ -22,34 +24,54 @@ window.document.addEventListener('keydown', pressOn);
 window.document.addEventListener('keyup', pressOff);
 
 //functions which tracks the keypress events
-{
+
     function pressOn(event) {
         keys[event.key] = true;
-        //console.log(keys);
+        console.log(keys);
     }
 
     function pressOff(event) {
         keys[event.key] = false;
-        //console.log(keys);
+        console.log(keys);
     }
-}
+
 
 //function which starts the game Play
 function start() {
     console.log("Game started");
     gameArea.classList.remove('hide');
     gameStart.classList.add('hide');
-    let car = document.createElement('div');
-    car.innerText = "CAR";
-    gameArea.appendChild(car);
     player.start = true;
     window.requestAnimationFrame(playGame);
+    let car = document.createElement('div');
+    car.innerText = "CAR";
+    car.setAttribute("class", "car");
+    gameArea.appendChild(car);
+    player.x = car.offsetLeft;
+    player.y = car.offsetTop;
+    //console.log(car.getBoundingClientRect());
+
 }
 
 //function 
-function playGame(){
-    if(player.start){
-        console.log("inplay")
+function playGame() {
+    console.log("inplay");
+    let car = document.querySelector(".car");
+    if (player.start) {
+        if (keys.ArrowUp) {
+            player.y -= player.speed;
+        }
+        if (keys.ArrowDown) {
+            player.y += player.speed;
+        }
+        if (keys.ArrowLeft) {
+            player.x -= player.speed;
+        }
+        if (keys.ArrowRight) {
+            player.x += player.speed;
+        }
+        car.style.left = player.x + 'px';
+        car.style.top = player.y + 'px';
+        window.requestAnimationFrame(playGame);
     }
-    window.requestAnimationFrame(playGame);
 }
