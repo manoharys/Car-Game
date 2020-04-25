@@ -1,17 +1,17 @@
-*{
-   
+* {
+
     box-sizing: border-box;
 }
 
-body{
+body {
     height: 100%;
-
-}
-.hide{
-    display: none;      
+    margin: 0;
 }
 
-.car,.enemy{
+
+
+.car,
+.enemy {
     position: absolute;
     bottom: 100px;
     margin: auto;
@@ -20,8 +20,8 @@ body{
     background-color: blue;
 }
 
-.gameArea{
-  
+.gameArea {
+
     width: 400px;
     height: 90vh;
     background-color: black;
@@ -30,7 +30,7 @@ body{
     position: relative;
 }
 
-.line{
+.line {
     position: absolute;
     width: 10px;
     height: 100px;
@@ -38,12 +38,54 @@ body{
     margin-left: 50%;
 }
 
-.score{
+.score {
     background: black;
-    color:white;
+    color: white;
     text-align: center;
     height: 3rem;
     position: sticky;
     margin: auto;
     display: none;
+    font-size: 2rem;
+}
+
+.gameStart {
+    font-size: 2rem;
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    top: 100px;
+    height: 300px;
+    color: white;
+    margin: auto;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url(./images/car-poster.jpg);
+    background-size: 100% 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.gameOver  {
+    font-size: 3rem;
+    text-align: center;
+    position: absolute;
+    width: 400px;
+    top: 250px;
+    left: 483px;
+    color: white;
+    margin: auto;
+    z-index: 1;
+    border: 2px solid red;
+    background-color: rgba(255, 0, 0, 0.342);
+}
+
+span{
+    color:rgb(214, 128, 30);
+    font-size: 3rem;
+    font-family: fantasy;
 }

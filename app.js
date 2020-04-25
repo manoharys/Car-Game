@@ -1,7 +1,9 @@
 const score = document.querySelector('.score');
 const gameStart = document.querySelector(".gameStart");
 const gameArea = document.querySelector(".gameArea");
-
+const body = document.querySelector('body');
+const end = document.querySelector('.end');
+console.log(end);
 
 //Object which init game play
 let player = {
@@ -40,7 +42,8 @@ function pressOff(event) {
 //function which starts the game Play
 function start() {
     console.log("Game started");
-    gameArea.classList.remove('hide');
+    gameArea.innerHTML = "";
+    //gameArea.classList.remove('hide');
     gameStart.classList.add('hide');
     player.start = true;
 
@@ -99,7 +102,7 @@ function playGame() {
         car.style.left = player.x + 'px';
         car.style.top = player.y + 'px';
         player.score++;
-        score.innerText ="Score: "+ player.score;
+        score.innerText = "Score : " + player.score;
         window.requestAnimationFrame(playGame);
     }
 }
@@ -123,8 +126,8 @@ function enemyCars(car) {
     ele.forEach(function (item) {
         if (isCollide(car, item)) {
             //console.log('hit');
-            endGame();
-        }
+            endGame();        
+         }
     })
     ele.forEach(function (item) {
         if (item.y >= 1500) {
@@ -152,4 +155,17 @@ function isCollide(a, b) {
 //function which ends the game play and displays the score
 function endGame() {
     player.start = false;
+    endGameStyles();
 }
+
+function endGameStyles() {
+    end.classList.remove('hide');
+    end.classList.add('gameOver');
+    end.innerHTML = "Game over!! "+ "<br>" + "your score : "+ player.score;
+    setTimeout(function(){
+        end.classList.add('hide');
+        gameStart.classList.remove('hide');
+    },2500);
+}    
+
+ 
