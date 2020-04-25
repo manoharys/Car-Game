@@ -26,3 +26,11 @@
     overflow: hidden;
     position: relative;
 }
+
+.line{
+    position: absolute;
+    width: 10px;
+    height: 100px;
+    background-color: white;
+    margin-left: 50%;
+}
