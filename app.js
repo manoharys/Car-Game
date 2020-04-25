@@ -5,6 +5,8 @@ const body = document.querySelector('body');
 const end = document.querySelector('.end');
 console.log(end);
 
+//images
+let carsImg = ['./images/E1.png','./images/E2.jpg','./images/E3.jpg'];
 //Object which init game play
 let player = {
     speed: 5,
@@ -68,7 +70,8 @@ function start() {
         enemy.y = ((i + 1) * 600) * -1;
         enemy.style.top = enemy.y + "px";
         enemy.style.left = Math.floor(Math.random() * 150) + "px";
-        enemy.style.backgroundColor = randomColors();
+        enemy.style.backgroundColor = 'black'
+        enemy.style.backgroundImage = `url(${carsImg[Math.floor(Math.random()*3)]})`;
         gameArea.appendChild(enemy);
     }
 }
