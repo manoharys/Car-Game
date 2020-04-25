@@ -56,7 +56,6 @@ function start() {
     }
     window.requestAnimationFrame(playGame);
     let car = document.createElement('div');
-    car.innerText = "CAR";
     car.setAttribute("class", "car");
     gameArea.appendChild(car);
     player.x = car.offsetLeft;
@@ -69,7 +68,7 @@ function start() {
         enemy.y = ((i + 1) * 600) * -1;
         enemy.style.top = enemy.y + "px";
         enemy.style.left = Math.floor(Math.random() * 150) + "px";
-        enemy.style.backgroundColor = "red";
+        enemy.style.backgroundColor = randomColors();
         gameArea.appendChild(enemy);
     }
 }
@@ -158,6 +157,7 @@ function endGame() {
     endGameStyles();
 }
 
+//function which displays the score and restarts the gameplay
 function endGameStyles() {
     end.classList.remove('hide');
     end.classList.add('gameOver');
@@ -168,4 +168,11 @@ function endGameStyles() {
     },2500);
 }    
 
- 
+ //function which return the random colors
+ function randomColors(){
+     function color(){
+         let c = Math.floor(Math.random()*256);
+         return c;
+     }
+     return "rgb("+color()+","+color()+","+color()+")";
+ }
