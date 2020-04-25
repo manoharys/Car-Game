@@ -3,10 +3,13 @@ const gameStart = document.querySelector(".gameStart");
 const gameArea = document.querySelector(".gameArea");
 const body = document.querySelector('body');
 const end = document.querySelector('.end');
-console.log(end);
 
+//sounds
+    let drive = new Audio('/audio/drive.mp3');
+    let crash = new Audio('/audio/crash.mp3');
+    //crash.pause();
 //images
-let carsImg = ['./images/E1.png','./images/E2.jpg','./images/E3.jpg'];
+let carsImg = ['./images/E1.png', './images/E2.jpg', './images/E3.jpg'];
 //Object which init game play
 let player = {
     speed: 5,
@@ -43,7 +46,7 @@ function pressOff(event) {
 
 //function which starts the game Play
 function start() {
-    console.log("Game started");
+    
     gameArea.innerHTML = "";
     //gameArea.classList.remove('hide');
     gameStart.classList.add('hide');
@@ -79,6 +82,7 @@ function start() {
 //function which starts the game play
 function playGame() {
     //console.log("inplay");
+    drive.play();
     let car = document.querySelector(".car");
     let road = gameArea.getBoundingClientRect();
     enemyCars(car);
@@ -128,8 +132,8 @@ function enemyCars(car) {
     ele.forEach(function (item) {
         if (isCollide(car, item)) {
             //console.log('hit');
-            endGame();        
-         }
+            endGame();
+        }
     })
     ele.forEach(function (item) {
         if (item.y >= 1500) {
@@ -164,18 +168,25 @@ function endGame() {
 function endGameStyles() {
     end.classList.remove('hide');
     end.classList.add('gameOver');
-    end.innerHTML = "Game over!! "+ "<br>" + "your score : "+ player.score;
-    setTimeout(function(){
+    end.innerHTML = "Game over!! " + "<br>" + "your score : " + player.score;
+    crash.currentTime =5;
+    setTimeout(function () {
+        drive.currentTime =100;
+        drive.pause();
+        crash.play();
         end.classList.add('hide');
         gameStart.classList.remove('hide');
-    },2500);
-}    
+        
+    }, 2000);
+    
+}
 
- //function which return the random colors
- function randomColors(){
-     function color(){
-         let c = Math.floor(Math.random()*256);
-         return c;
-     }
-     return "rgb("+color()+","+color()+","+color()+")";
- }
+//function which return the random colors
+function randomColors() {
+    function color() {
+        let c = Math.floor(Math.random() * 256);
+        return c;
+    }
+    return "rgb(" + color() + "," + color() + "," + color() + ")";
+}
+
