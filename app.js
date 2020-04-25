@@ -1,11 +1,12 @@
-const score = document.querySelector('.score')
+const score = document.querySelector('.score');
 const gameStart = document.querySelector(".gameStart");
 const gameArea = document.querySelector(".gameArea");
 
 
 //Object which init game play
 let player = {
-    speed: 5
+    speed: 5,
+    score: 0
 };
 
 //Object which tracks the keyPresses
@@ -42,6 +43,7 @@ function start() {
     gameArea.classList.remove('hide');
     gameStart.classList.add('hide');
     player.start = true;
+
     for (let i = 0; i < 10; i++) { //RoadLines
         let div = document.createElement('div');
         div.classList.add("line");
@@ -61,25 +63,27 @@ function start() {
     for (let i = 0; i < 5; i++) { //Enemy cars
         let enemy = document.createElement('div');
         enemy.classList.add("enemy");
-        enemy.y = ((i+1)*600)*-1;
-        enemy.style.top = enemy.y+ "px";
-        enemy.style.left = Math.floor(Math.random()*150) +"px";
+        enemy.y = ((i + 1) * 600) * -1;
+        enemy.style.top = enemy.y + "px";
+        enemy.style.left = Math.floor(Math.random() * 150) + "px";
         enemy.style.backgroundColor = "red";
         gameArea.appendChild(enemy);
     }
 }
 
-//function 
+//function which starts the game play
 function playGame() {
     //console.log("inplay");
     let car = document.querySelector(".car");
     let road = gameArea.getBoundingClientRect();
     enemyCars(car);
     moveLines();
+    score.style.display = "block";
     //console.log("x="+player.x);
     //console.log("y="+player.y);
     //console.log(road);
     if (player.start) {
+
         if (keys.ArrowUp && (player.y > (road.top = -250))) {
             player.y -= player.speed;
         }
@@ -94,6 +98,8 @@ function playGame() {
         }
         car.style.left = player.x + 'px';
         car.style.top = player.y + 'px';
+        player.score++;
+        score.innerText ="Score: "+ player.score;
         window.requestAnimationFrame(playGame);
     }
 }
@@ -112,17 +118,18 @@ function moveLines() {
 }
 
 //Function which moves enemy cars
-function enemyCars(car){
+function enemyCars(car) {
     let ele = document.querySelectorAll(".enemy");
-    ele.forEach(function(item){
-        if(isCollide(car,item)){
-            console.log('hit');
+    ele.forEach(function (item) {
+        if (isCollide(car, item)) {
+            //console.log('hit');
+            endGame();
         }
     })
     ele.forEach(function (item) {
         if (item.y >= 1500) {
             item.y = -600;
-            item.style.left = Math.floor(Math.random()*300) +"px";
+            item.style.left = Math.floor(Math.random() * 300) + "px";
         }
         item.y += player.speed;
         item.style.top = item.y + "px";
@@ -130,14 +137,19 @@ function enemyCars(car){
 }
 
 //Function which checks the collision detection 
-function isCollide(a,b){
+function isCollide(a, b) {
     let aRect = a.getBoundingClientRect();
     let bRect = b.getBoundingClientRect();
 
     return !(
-        (aRect.top>bRect.bottom)||
-        (aRect.bottom<bRect.top)||
-        (aRect.left>bRect.right)||
-        (aRect.right<bRect.left)
+        (aRect.top > bRect.bottom) ||
+        (aRect.bottom < bRect.top) ||
+        (aRect.left > bRect.right) ||
+        (aRect.right < bRect.left)
     )
+}
+
+//function which ends the game play and displays the score
+function endGame() {
+    player.start = false;
 }

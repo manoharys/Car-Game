@@ -1,9 +1,12 @@
 *{
-    padding: 0;
-    margin: 0;
+   
     box-sizing: border-box;
 }
 
+body{
+    height: 100%;
+
+}
 .hide{
     display: none;      
 }
@@ -20,7 +23,7 @@
 .gameArea{
   
     width: 400px;
-    height: 100vh;
+    height: 90vh;
     background-color: black;
     margin: auto;
     overflow: hidden;
@@ -33,4 +36,14 @@
     height: 100px;
     background-color: white;
     margin-left: 50%;
+}
+
+.score{
+    background: black;
+    color:white;
+    text-align: center;
+    height: 3rem;
+    position: sticky;
+    margin: auto;
+    display: none;
 }
