@@ -58,6 +58,15 @@ function start() {
     player.y = car.offsetTop;
     //console.log(car.getBoundingClientRect());
 
+    for (let i = 0; i < 5; i++) { //Enemy cars
+        let enemy = document.createElement('div');
+        enemy.classList.add("enemy");
+        enemy.y = ((i+1)*600)*-1;
+        enemy.style.top = enemy.y+ "px";
+        enemy.style.left = Math.floor(Math.random()*150) +"px";
+        enemy.style.backgroundColor = "red";
+        gameArea.appendChild(enemy);
+    }
 }
 
 //function 
@@ -65,7 +74,7 @@ function playGame() {
     console.log("inplay");
     let car = document.querySelector(".car");
     let road = gameArea.getBoundingClientRect();
-
+    enemyCars();
     moveLines();
     //console.log("x="+player.x);
     //console.log("y="+player.y);
@@ -99,5 +108,18 @@ function moveLines() {
         }
         item.y += player.speed;
         item.style.top = item.y + 'px';
+    })
+}
+
+//Function which moves enemy cars
+function enemyCars(){
+    let ele = document.querySelectorAll(".enemy");
+    ele.forEach(function (item) {
+        if (item.y >= 1500) {
+            item.y = -600;
+            item.style.left = Math.floor(Math.random()*300) +"px";
+        }
+        item.y += player.speed;
+        item.style.top = item.y + "px";
     })
 }
