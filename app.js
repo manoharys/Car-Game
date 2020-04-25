@@ -57,17 +57,21 @@ function start() {
 function playGame() {
     console.log("inplay");
     let car = document.querySelector(".car");
+    let road = gameArea.getBoundingClientRect();
+    console.log("x="+player.x);
+    console.log("y="+player.y);
+    console.log(road);
     if (player.start) {
-        if (keys.ArrowUp) {
+        if (keys.ArrowUp && (player.y > (road.top=-250))) {
             player.y -= player.speed;
         }
-        if (keys.ArrowDown) {
+        if (keys.ArrowDown && player.y<road.bottom) {
             player.y += player.speed;
         }
-        if (keys.ArrowLeft) {
+        if (keys.ArrowLeft && player.x>0) {
             player.x -= player.speed;
         }
-        if (keys.ArrowRight) {
+        if (keys.ArrowRight && player.x<(road.width-50)) {
             player.x += player.speed;
         }
         car.style.left = player.x + 'px';
