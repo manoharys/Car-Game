@@ -71,10 +71,10 @@ function start() {
 
 //function 
 function playGame() {
-    console.log("inplay");
+    //console.log("inplay");
     let car = document.querySelector(".car");
     let road = gameArea.getBoundingClientRect();
-    enemyCars();
+    enemyCars(car);
     moveLines();
     //console.log("x="+player.x);
     //console.log("y="+player.y);
@@ -112,8 +112,13 @@ function moveLines() {
 }
 
 //Function which moves enemy cars
-function enemyCars(){
+function enemyCars(car){
     let ele = document.querySelectorAll(".enemy");
+    ele.forEach(function(item){
+        if(isCollide(car,item)){
+            console.log('hit');
+        }
+    })
     ele.forEach(function (item) {
         if (item.y >= 1500) {
             item.y = -600;
@@ -122,4 +127,17 @@ function enemyCars(){
         item.y += player.speed;
         item.style.top = item.y + "px";
     })
+}
+
+//Function which checks the collision detection 
+function isCollide(a,b){
+    let aRect = a.getBoundingClientRect();
+    let bRect = b.getBoundingClientRect();
+
+    return !(
+        (aRect.top>bRect.bottom)||
+        (aRect.bottom<bRect.top)||
+        (aRect.left>bRect.right)||
+        (aRect.right<bRect.left)
+    )
 }
