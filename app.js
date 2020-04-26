@@ -5,8 +5,8 @@ const body = document.querySelector('body');
 const end = document.querySelector('.end');
 
 //sounds
-    let drive = new Audio('/audio/drive.mp3');
-    let crash = new Audio('/audio/crash.mp3');
+    let drive = new Audio('./audio/drive.mp3');
+    let crash = new Audio('./audio/crash.mp3');
     //crash.pause();
 //images
 let carsImg = ['./images/E1.png', './images/E2.jpg', './images/E3.jpg'];
