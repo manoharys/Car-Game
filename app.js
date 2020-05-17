@@ -5,9 +5,9 @@ const body = document.querySelector('body');
 const end = document.querySelector('.end');
 
 //sounds
-    let drive = new Audio('./audio/drive.mp3');
-    let crash = new Audio('./audio/crash.mp3');
-    //crash.pause();
+let drive = new Audio('./audio/drive.mp3');
+let crash = new Audio('./audio/crash.mp3');
+//crash.pause();
 //images
 let carsImg = ['./images/E1.png', './images/E2.jpg', './images/E3.jpg'];
 //Object which init game play
@@ -46,7 +46,7 @@ function pressOff(event) {
 
 //function which starts the game Play
 function start() {
-    
+
     gameArea.innerHTML = "";
     //gameArea.classList.remove('hide');
     gameStart.classList.add('hide');
@@ -132,6 +132,8 @@ function enemyCars(car) {
     ele.forEach(function (item) {
         if (isCollide(car, item)) {
             //console.log('hit');
+            drive.pause();
+            crash.play();
             endGame();
         }
     })
@@ -166,19 +168,19 @@ function endGame() {
 
 //function which displays the score and restarts the gameplay
 function endGameStyles() {
+  
     end.classList.remove('hide');
     end.classList.add('gameOver');
     end.innerHTML = "Game over!! " + "<br>" + "your score : " + player.score;
-    crash.currentTime =5;
+    crash.currentTime = 5;
     setTimeout(function () {
-        drive.currentTime =100;
-        drive.pause();
-        crash.play();
+        drive.currentTime = 100;
+       
         end.classList.add('hide');
         gameStart.classList.remove('hide');
-        
-    }, 2000);
-    
+
+    }, 1500);
+
 }
 
 //function which return the random colors
@@ -189,4 +191,3 @@ function randomColors() {
     }
     return "rgb(" + color() + "," + color() + "," + color() + ")";
 }
-
