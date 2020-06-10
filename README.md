@@ -9,3 +9,6 @@ The user has to use the arrowKeys in order to control the car.
 It uses various images in order to form a simple gaming environment.
 
 <a href="https://manoharys.github.io/Car-Game/">Play here</a>
+
+## preview
+ <img src = "https://github.com/manoharys/Car-Game/blob/master/preview.gif">
